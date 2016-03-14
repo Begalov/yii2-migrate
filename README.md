@@ -12,8 +12,12 @@ Supported commands:
 
 ## Installation
 
-Configure config/console.php or console/config/main.php:
-```
+### via packagist
+
+#### composer require kubo0/yii2-migrate-array 
+
+Configure **config/console.php** or **console/config/main.php**:
+```php
 return [
 ...
     'controllerMap' => [
@@ -25,10 +29,10 @@ return [
 ...
 ];
 ```
-then ./yii migrate/create will use our template instead of standard one.
+then **./yii migrate/create** will use our template instead of standard one.
 
-modify $migration array to your purpose:
-```
+modify *$migration** array for your purpose with various count of tables:
+```php
 private $migration = [
     'table1'=>[
         'createTable' => [
@@ -59,7 +63,7 @@ private $migration = [
         ]],
     ];
 ```
-and ./yii migrate/up or down will apply and rollback migration.
+and **./yii migrate/up** or **down** will apply and rollback migration.
 
 tips used from https://yii2-cookbook.readthedocs.org/using-custom-migration-template/
 
