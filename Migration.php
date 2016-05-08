@@ -2,21 +2,29 @@
 
 namespace kubo0\migratearray;
 
+/**
+ * @author RUben Begalov <begalov@gmail.com>
+ */
 class Migration extends \yii\db\Migration
 {
 
     /**
      * Migrate all tables.
-     * @param array $ts 
-     * @param bool $way 
+     * @param array $tables 
+     * @param bool $way: true for upgrading and false for downgrading
      * @return bool
      */
-    public function migrate($ts,$way=true,$safe=false)
+    public function migrate($tables,$way=true,$safe=false)
     {
-        if (!is_array($ts))
+        if (!is_array($tables))
             return false;
 
-        foreach ($ts as $t_name => $t) {
+        if (!$way)
+            $tables = array_reverse($tables);
+
+        foreach ($tables as $t_name => $t) {
+            if (is_int($t_name))
+                $t_name = $t['tableName'];
             $r[$t_name] = $this->migrateOneTable($t_name,$t,$way);
         }
         return in_array(false,$r) ? false : true;

@@ -3,7 +3,7 @@
 Yii2 up and down migration as array helper and template.
 
 Supported commands:
-* createTable
+* createTable with columns and options
 * renameTable
 * addColumn
 * renameColumn
@@ -28,9 +28,14 @@ return [
 then ./yii migrate/create will use our template instead of standard one.
 
 modify $migration array to your purpose:
+
 ```
 private $migration = [
     'table1'=>[
+        'renameTable' => 'table2'
+        ],
+    [
+        'tableName' => 'table1',
         'createTable' => [
             'options'=>'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB',
             'columns'=>[ // colum name => schema type
@@ -59,6 +64,9 @@ private $migration = [
         ]],
     ];
 ```
+
+* Don't use same keys as table name in $migration array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
+
 and ./yii migrate/up or down will apply and rollback migration.
 
 tips used from https://yii2-cookbook.readthedocs.org/using-custom-migration-template/

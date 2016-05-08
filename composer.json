@@ -3,7 +3,7 @@
     "description": "Yii2 migration as array helper and template",
     "type": "yii2-extension",
     "license": "BSD 4-Clause",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "require": {
         "yiisoft/yii2": "^2.0"
     },

@@ -23,6 +23,11 @@ class <?= $className ?> extends \kubo0\migratearray\Migration
                     'status' => 'int(1) null',
                     'text' => Schema::TYPE_TEXT . ' null',
             ]]],
+        [
+        'tableName' => 'table1'
+        // command => new name
+        'renameTable'=>'table2',
+        ],
         'table2'=>[
             'renameTable'=>'table22', // command => new name
             'renameColumn'=>[
@@ -33,13 +38,14 @@ class <?= $className ?> extends \kubo0\migratearray\Migration
             'alterColumn'=>[ // column name => [old type => new type]
                 'columnName1'=>[Schema::TYPE_INTEGER => Schema::TYPE_STRING],
                 'columnName2'=>['int(1) null' => 'string'],
-            ]],
+            ],
             'addColumn'=>[ // colum name => schema type
                 'newColumnName3'=>Schema::TYPE_INTEGER,
             ],
             'createIndex'=>[ // index name => uniq bool
                 'indexName' => true,
-            ]],
+            ]
+        ],
     ];
 
     public function up()
