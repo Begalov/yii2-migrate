@@ -55,7 +55,7 @@ private $migration = [
         'alterColumn'=>[ // column name => [old type => new type]
             'columnName1'=>[Schema::TYPE_INTEGER => Schema::TYPE_STRING],
             'columnName2'=>['int(1) null' => 'string'],
-        ]],
+        ],
         'addColumn'=>[ // colum name => schema type
             'newColumnName3'=>Schema::TYPE_INTEGER,
         ],

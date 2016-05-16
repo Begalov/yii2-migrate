@@ -22,7 +22,9 @@ class <?= $className ?> extends \kubo0\migratearray\Migration
                     'type' => Schema::TYPE_INTEGER,
                     'status' => 'int(1) null',
                     'text' => Schema::TYPE_TEXT . ' null',
-            ]]],
+                    ]
+                ]
+            ],
         [
         'tableName' => 'table1'
         // command => new name
