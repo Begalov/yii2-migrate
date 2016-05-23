@@ -32,10 +32,6 @@ modify $migration array to your purpose:
 ```
 private $migration = [
     'table1'=>[
-        'renameTable' => 'table2'
-        ],
-    [
-        'tableName' => 'table1',
         'createTable' => [
             'options'=>'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB',
             'columns'=>[ // colum name => schema type
@@ -44,7 +40,14 @@ private $migration = [
                 'type' => Schema::TYPE_INTEGER,
                 'status' => 'int(1) null',
                 'text' => Schema::TYPE_TEXT . ' null',
-        ]]],
+                ]
+            ]
+        ],
+    [
+    'tableName' => 'table1'
+    // command => new name
+    'renameTable'=>'table2',
+    ],
     'table2'=>[
         'renameTable'=>'table22', // command => new name
         'renameColumn'=>[
@@ -61,8 +64,9 @@ private $migration = [
         ],
         'createIndex'=>[ // index name => uniq bool
             'indexName' => true,
-        ]],
-    ];
+        ]
+    ],
+];
 ```
 
 * Don't use same keys as table name in $migration array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
