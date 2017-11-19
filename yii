@@ -1,0 +1,24 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Yii console bootstrap file
+ * for module tests and message generation
+ * @link http://www.yiiframework.com/
+ * @copyright Copyright (c) 2008 Yii Software LLC
+ * @license http://www.yiiframework.com/license/
+ */
+
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+defined('YII_ENV') or define('YII_ENV', 'dev');
+defined('VENDOR_PATH') or define('VENDOR_PATH', realpath(__DIR__ . '/../../vendor/'));
+
+require(VENDOR_PATH . '/autoload.php');
+require(VENDOR_PATH . '/yiisoft/yii2/Yii.php');
+
+// require(__DIR__ . '/common/config/bootstrap.php');
+// require(__DIR__ . '/console/config/bootstrap.php');
+$config = //yii\helpers\ArrayHelper::merge(
+    require(__DIR__ . '/config.php');
+
+
+exit((new yii\console\Application($config))->run());

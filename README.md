@@ -1,16 +1,34 @@
 # yii2-migrate-array
 
-Yii2 up and down migration as array helper and template.
+Yii2 2-way migration as array helper and template.
 
-Supported commands:
-* createTable with columns and options
-* renameTable
-* addColumn
-* renameColumn
-* alterColumn
-* createIndex
+### Supported commands:
+* execute - not planning
+* insert - not planning
+* batchInsert - not planning
+* update - not planning
+* delete - not planning
+* createTable - yes
+* renameTable - yes
+* dropTable - no
+* truncateTable - no
+* addColumn - yes
+* dropColumn - yes
+* renameColumn - yes
+* alterColumn - yes
+* addPrimaryKey - yes
+* dropPrimaryKey - yes
+* addForeignKey - yes
+* dropForeignKey - no*
+* createIndex - yes
+* dropIndex - yes
+* addCommentOnColumn - no
+* addCommentOnTable - no
+* dropCommentFromColumn - no
+* dropCommentFromTable - no
 
 ## Installation
+is not nessesary, just if you whant 'yii migrate/create' template generation
 
 Configure config/console.php or console/config/main.php:
 ```
@@ -27,10 +45,10 @@ return [
 ```
 then ./yii migrate/create will use our template instead of standard one.
 
-modify $migration array to your purpose:
+modify array to your purpose:
 
 ```
-private $migration = [
+[
     'table1'=>[
         'createTable' => [
             'options'=>'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB',
@@ -62,14 +80,17 @@ private $migration = [
         'addColumn'=>[ // colum name => schema type
             'newColumnName3'=>Schema::TYPE_INTEGER,
         ],
-        'createIndex'=>[ // index name => uniq bool
+        'createIndex'=>[ // index name => bool uniq
+            'indexName' => true,
+        ],
+        'dropIndex'=>[ // index name => bool was uniq?
             'indexName' => true,
         ]
     ],
 ];
 ```
 
-* Don't use same keys as table name in $migration array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
+* Don't use same keys as names in same array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
 
 and ./yii migrate/up or down will apply and rollback migration.
 

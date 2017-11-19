@@ -1,0 +1,12 @@
+# Codeception Test Suite Configuration
+#
+# Suite for unit (internal) tests.
+
+class_name: unit\UnitTester
+bootstrap: false
+modules:
+    enabled:
+        - Yii2:
+            part: fixtures
+        - Asserts
+        # - \Helper\Unit
