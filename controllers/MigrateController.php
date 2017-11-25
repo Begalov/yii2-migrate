@@ -1,36 +1,36 @@
 <?php
-namespace kubo0\migratearray\controllers;
+namespace kubo0\migrate\controllers;
 
-use yii\helpers\Console;
-use yii\console\Controller;
 use Yii;
+use yii\console\controllers\MigrateController as BaseMigrateController;
+use yii\helpers\Console;
 
-class DbController extends Controller
+class MigrateController extends BaseMigrateController
 {
 
     /**
      * Main action.
      * @param string|null $tb 
      */
-    public function actionGetSchema($tb = null) {
-        array_walk(self::tableSchema($tb), function($r) {
-            Console::output($r);
+    public function actionGetSchema($tableName = null) {
+        array_walk(self::tableSchema($tableName), function($line) {
+            Console::output($line);
         });
     }
 
     /**
      * Extract migration schema from curent db.
-     * @param string $tb 
+     * @param string $tableName 
      * @return array of lines
      */
-    private static function tableSchema($tb) {
+    private static function tableSchema($tableName) {
         $ident = '    ';
         $schemas = Yii::$app->db->schema->tableSchemas;
-        foreach ($schemas as $kt => $table) {
+        foreach ($schemas as $tableKey => $table) {
             if ($table->name == "migration" or 
-                ($tb and $table->name != $tb)) continue;
-            $result[] = '$tableName'."$kt = '$table->name';";
-            $result[] = '$this->createTable(self::$tableName'.$kt.', [';
+                ($tableName and $table->name != $tableName)) continue;
+            $result[] = '$tableName'."$tableKey = '$table->name';";
+            $result[] = '$this->createTable(self::$tableName'.$tableKey.', [';
             foreach ($table->columns as $kc => $column) {
                 if ($column->isPrimaryKey)
                     $value = 'primaryKey()';

@@ -9,30 +9,32 @@ echo "<?php\n";
 ?>
 
 use yii\db\Schema;
+use kubo0\migrate\MigrationAsArray as Migration;
 
-class <?= $className ?> extends \kubo0\migratearray\Migration
+class <?= $className ?> extends Migration
 {
     private function getMigration() {
         return [
-        'table1' => [
+        'firstTable' => [
             'createTable' => [
                 'options' => 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB',
-                'columns' => [ // colum name => schema type
+                'columns' => [
+                    // colum name => schema type
                     'id' => Schema::TYPE_BIGPK,
-                    'name' => Schema::TYPE_STRING,
+                    'name' => Schema::TYPE_STRING . ' notNull',
                     'type' => Schema::TYPE_INTEGER,
                     'status' => 'int(1) null',
-                    'text' => Schema::TYPE_TEXT . ' null',
+                    'text' => $this->text()->allowNull()->comment('some comment'),
                     ]
                 ]
             ],
         [
-        'tableName' => 'table1'
+        'tableName' => 'firstTable'
         // command => new name
-        'renameTable' => 'table2',
+        'tableToRename' => 'tableToRenameNewName',
         ],
-        'table2' => [
-            'renameTable' => 'table22', // command => new name
+        'secondTable' => [
+            'renameTable' => 'secondTableNewName', // command => new name
             'renameColumn' => [
                 'oldColumnName1' => 'newColumnName1',
                 'oldColumnName2' => 'newColumnName2',
@@ -55,19 +57,6 @@ class <?= $className ?> extends \kubo0\migratearray\Migration
     ];
     }
 
-
-    public function up()
-    {
-        return $this->migrate($this->migration);
-    }
-
-    public function down()
-    {
-        return $this->migrate($this->migration,false);
-    }
-
-
-    /*
     // Use safeUp/safeDown to run migration code within a transaction
     public function safeUp()
     {
@@ -77,6 +66,17 @@ class <?= $className ?> extends \kubo0\migratearray\Migration
     public function safeDown()
     {
 
+    }
+
+    /*
+    public function up()
+    {
+        return $this->migrate($this->migration);
+    }
+
+    public function down()
+    {
+        return $this->migrate($this->migration,false);
     }
     */
 }

@@ -1,8 +1,8 @@
-# yii2-migrate-array
+# yii2-migrate
 
-Yii2 2-way migration as array helper and template.
+## Yii2 bidirectional migration helper and template.
 
-### Supported commands:
+### Supported migration commands:
 * execute - not planning
 * insert - not planning
 * batchInsert - not planning
@@ -27,8 +27,8 @@ Yii2 2-way migration as array helper and template.
 * dropCommentFromColumn - no
 * dropCommentFromTable - no
 
-## Installation
-is not nessesary, just if you whant 'yii migrate/create' template generation
+### Installation
+Is not nessesary, just if you whant 'yii migrate/create' template generation and 'yii migrate/getSchema tableName'
 
 Configure config/console.php or console/config/main.php:
 ```
@@ -37,7 +37,7 @@ return [
     'controllerMap' => [
         'migrate' => [
             'class' => 'yii\console\controllers\MigrateController',
-            'templateFile' => 'kubo0/migratearray/Migration_array.php',
+            'templateFile' => 'kubo0/migrate/views/MigrationAsArray.php',
         ],
     ],
 ...
@@ -95,4 +95,8 @@ modify array to your purpose:
 and ./yii migrate/up or down will apply and rollback migration.
 
 tips used from https://yii2-cookbook.readthedocs.org/using-custom-migration-template/
+
+## DbController
+
+Generate migration schema for all db tables if not specified.
 

@@ -22,9 +22,6 @@ return [
             // 'dsn' => 'mysql:host=localhost;dbname=yii2-migrate-array',
             'dsn' => 'sqlite:/_data/db.sqlite',
         ],
-        'mailer' => [
-            'useFileTransport' => true,
-        ],
         'urlManager' => [
             'showScriptName' => true,
         ],

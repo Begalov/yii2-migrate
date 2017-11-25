@@ -1,6 +1,6 @@
 <?php
 
-namespace kubo0\migratearray;
+namespace kubo0\migrate;
 
 use yii\db\Migration;
 
@@ -10,7 +10,7 @@ use yii\db\Migration;
  * @todo improve 2-way logic in add/dropColumn, create/dropIndex, add/dropPrimaryKey, add/dropForeignKey
  * @version [0.2.1] [getter, tableOptions]
  */
-class MigrationArray extends Migration
+class MigrationAsArray extends Migration
 {
     public function getTableOptions()
     {
@@ -28,7 +28,7 @@ class MigrationArray extends Migration
      * @param bool $way: true for upgrading and false for downgrading
      * @return bool
      */
-    protected function migrate($tables,$way=true,$safe=false)
+    protected function migrate($tables, $way=true, $safe=false)
     {
         if (!is_array($tables))
             return false;
@@ -36,10 +36,10 @@ class MigrationArray extends Migration
         if (!$way)
             $tables = array_reverse($tables);
 
-        foreach ($tables as $t_name => $t) {
+        foreach ($tables as $t_name => $table) {
             if (is_int($t_name))
-                $t_name = $t['tableName'];
-            $r[$t_name] = $this->migrateOneTable($t_name, $t, $way);
+                $t_name = $table['tableName'];
+            $r[$t_name] = $this->migrateOneTable($t_name, $table, $way);
         }
         return in_array(false, $r) ? false : true;
     }

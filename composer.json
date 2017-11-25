@@ -1,9 +1,9 @@
 {
-    "name": "kubo0/yii2-migrate-array",
+    "name": "kubo0/yii2-migrate",
     "description": "Yii2 migration as array helper and template",
     "type": "yii2-extension",
     "license": "BSD 4-Clause",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "require": {
         "yiisoft/yii2": "^2.0"
     },
@@ -15,7 +15,7 @@
     ],
     "autoload": {
         "psr-4": {
-            "kubo0\\migratearray\\": ""
+            "kubo0\\migrate\\": ""
         }
     }
 }

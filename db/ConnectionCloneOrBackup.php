@@ -1,6 +1,7 @@
 <?php
-namespace kubo0\migratearray;
+namespace kubo0\migrate;
 
+use yii\db\Connection;
 /*
  * Author: RUben Begalov@gmail.com
  * Name: ConnectCloneBackup ex. ConnectBackup ex. DbBackup
@@ -17,7 +18,7 @@ namespace kubo0\migratearray;
  *      $db->backup();
  * You could use backup(true) to reset backup, it set to false by default. 
  */
-class ConnectCloneBackup extends \yii\db\Connection
+class ConnectionCloneOrBackup extends Connection
 {
     // Marker file name
     const RESET_F = 'backup_reset';
