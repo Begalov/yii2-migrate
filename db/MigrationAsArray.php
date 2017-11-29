@@ -1,17 +1,17 @@
 <?php
-
-namespace kubo0\migrate;
+namespace kubo0\migrate\db;
 
 use yii\db\Migration;
 
 /**
  * @author RUben <begalov@gmail.com>
- * @todo giving $tableSchema up
+ * @todo maybe use as trait?
  * @todo improve 2-way logic in add/dropColumn, create/dropIndex, add/dropPrimaryKey, add/dropForeignKey
- * @version [0.2.1] [getter, tableOptions]
+ * @version 0.2.1
  */
 class MigrationAsArray extends Migration
 {
+
     public function getTableOptions()
     {
         $tableOptions = null;
@@ -110,7 +110,6 @@ class MigrationAsArray extends Migration
             }
         }
 
-
         if (is_array($t['createIndex'])) {
             foreach ($t['createIndex'] as $index => $uniq) {
                 // $index($index, $t_name, $index, $uniq, $way);
@@ -198,8 +197,6 @@ class MigrationAsArray extends Migration
                 }
             }
         }
-
-
 
         return true;
     }

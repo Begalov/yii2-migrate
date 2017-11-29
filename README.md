@@ -1,102 +1,60 @@
 # yii2-migrate
 
-## Yii2 bidirectional migration helper and template.
+Migration assistant
 
-### Supported migration commands:
-* execute - not planning
-* insert - not planning
-* batchInsert - not planning
-* update - not planning
-* delete - not planning
-* createTable - yes
-* renameTable - yes
-* dropTable - no
-* truncateTable - no
-* addColumn - yes
-* dropColumn - yes
-* renameColumn - yes
-* alterColumn - yes
-* addPrimaryKey - yes
-* dropPrimaryKey - yes
-* addForeignKey - yes
-* dropForeignKey - no*
-* createIndex - yes
-* dropIndex - yes
-* addCommentOnColumn - no
-* addCommentOnTable - no
-* dropCommentFromColumn - no
-* dropCommentFromTable - no
+## Installation
 
-### Installation
-Is not nessesary, just if you whant 'yii migrate/create' template generation and 'yii migrate/getSchema tableName'
-
-Configure config/console.php or console/config/main.php:
+Console app configuration:
 ```
 return [
 ...
     'controllerMap' => [
         'migrate' => [
-            'class' => 'yii\console\controllers\MigrateController',
-            'templateFile' => 'kubo0/migrate/views/MigrationAsArray.php',
+            'class' => 'kubo0\migrate\controllers\MigrateController',
+            'templateFile' => 'kubo0\migrate\views\MigrationAsArray.php',
         ],
     ],
 ...
 ];
 ```
-then ./yii migrate/create will use our template instead of standard one.
 
-modify array to your purpose:
+## Features
 
-```
-[
-    'table1'=>[
-        'createTable' => [
-            'options'=>'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB',
-            'columns'=>[ // colum name => schema type
-                'id' => Schema::TYPE_BIGPK,
-                'name' => Schema::TYPE_STRING,
-                'type' => Schema::TYPE_INTEGER,
-                'status' => 'int(1) null',
-                'text' => Schema::TYPE_TEXT . ' null',
-                ]
-            ]
-        ],
-    [
-    'tableName' => 'table1'
-    // command => new name
-    'renameTable'=>'table2',
-    ],
-    'table2'=>[
-        'renameTable'=>'table22', // command => new name
-        'renameColumn'=>[
-            'oldColumnName1' => 'newColumnName1',
-            'oldColumnName2' => 'newColumnName2',
-            'oldColumnName3' => 'newColumnName3',
-        ],
-        'alterColumn'=>[ // column name => [old type => new type]
-            'columnName1'=>[Schema::TYPE_INTEGER => Schema::TYPE_STRING],
-            'columnName2'=>['int(1) null' => 'string'],
-        ],
-        'addColumn'=>[ // colum name => schema type
-            'newColumnName3'=>Schema::TYPE_INTEGER,
-        ],
-        'createIndex'=>[ // index name => bool uniq
-            'indexName' => true,
-        ],
-        'dropIndex'=>[ // index name => bool was uniq?
-            'indexName' => true,
-        ]
-    ],
-];
-```
+### Generate migration schema for existing table
 
-* Don't use same keys as names in same array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
+`yii migrate/get-schema` from `kubo0\migrate\controllers\MigrateController` generate migration schema for all db tables if not specified.
 
-and ./yii migrate/up or down will apply and rollback migration.
+### Bidirectional migration over array schema
+
+When you create a new table, the original way is comfy, but if you have to deal with the development of an existing table migration, the original one can confuse.
+
+#### Commands avaible over array
+
+`yii migrate/create` generate template from `kubo0\migrate\views\MigrationAsArray.php`
+
+* createTable, renameTable - yes
+* dropTable, truncateTable - no
+* addColumn, dropColumn - yes
+* renameColumn, alterColumn - yes
+* addPrimaryKey, dropPrimaryKey - yes
+* addForeignKey, dropForeignKey - no
+* createIndex, dropIndex - yes
+* addCommentOnColumn, addCommentOnTable - no
+* dropCommentFromColumn, dropCommentFromTable - no
+* execute, insert, batchInsert, update, delete - not planning
+
+#### Usage
+
+Modify array to your purpose. Don't use same keys as names in same array. If you need to rename one table and on it's place create other with same name use 'tableName' insted of key;
+
+and `./yii migrate/up` or `down` will apply and rollback migration.
 
 tips used from https://yii2-cookbook.readthedocs.org/using-custom-migration-template/
 
-## DbController
 
-Generate migration schema for all db tables if not specified.
 
+
+
+## Sqlite and comments
+
+If your migration contains comments just add `kubo0\migrate\traits\MigrationSqliteCommentTrait` in it

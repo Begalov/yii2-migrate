@@ -18,8 +18,6 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            // 'class' => 'common\components\db\ConnectCloneBackup',
-            // 'dsn' => 'mysql:host=localhost;dbname=yii2-migrate-array',
             'dsn' => 'sqlite:/_data/db.sqlite',
         ],
         'urlManager' => [

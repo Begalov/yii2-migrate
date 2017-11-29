@@ -15,10 +15,7 @@ defined('VENDOR_PATH') or define('VENDOR_PATH', realpath(__DIR__ . '/../../vendo
 require(VENDOR_PATH . '/autoload.php');
 require(VENDOR_PATH . '/yiisoft/yii2/Yii.php');
 
-// require(__DIR__ . '/common/config/bootstrap.php');
-// require(__DIR__ . '/console/config/bootstrap.php');
-$config = //yii\helpers\ArrayHelper::merge(
-    require(__DIR__ . '/config.php');
+$config = require(__DIR__ . '/config.php');
 
 
 exit((new yii\console\Application($config))->run());

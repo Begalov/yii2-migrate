@@ -9,11 +9,11 @@ class MigrateController extends BaseMigrateController
 {
 
     /**
-     * Main action.
-     * @param string|null $tb 
+     * Generate migration schema from all db tables if not specified.
+     * @param string|null $tableName comma separeted table names
      */
     public function actionGetSchema($tableName = null) {
-        array_walk(self::tableSchema($tableName), function($line) {
+        array_walk(self::tableSchema(explode(',', $tableName)), function($line) {
             Console::output($line);
         });
     }
@@ -23,12 +23,13 @@ class MigrateController extends BaseMigrateController
      * @param string $tableName 
      * @return array of lines
      */
-    private static function tableSchema($tableName) {
+    private static function tableSchema(array $tableName) {
         $ident = '    ';
         $schemas = Yii::$app->db->schema->tableSchemas;
+        if (YII_DEBUG) file_put_contents('debug$tableName', \yii\helpers\VarDumper::dumpAsString(boolval($tableName[0])));
         foreach ($schemas as $tableKey => $table) {
             if ($table->name == "migration" or 
-                ($tableName and $table->name != $tableName)) continue;
+                (boolval($tableName[0]) and !in_array($table->name, $tableName))) continue;
             $result[] = '$tableName'."$tableKey = '$table->name';";
             $result[] = '$this->createTable(self::$tableName'.$tableKey.', [';
             foreach ($table->columns as $kc => $column) {

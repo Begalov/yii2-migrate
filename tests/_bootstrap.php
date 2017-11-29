@@ -5,8 +5,10 @@
 
 defined('YII_DEBUG') or define('YII_DEBUG', true);
 defined('YII_ENV') or define('YII_ENV', 'test');
-defined('YII_APP_PATH') or define('YII_APP_PATH', realpath(__DIR__.'/../../../adv.dev/'));
-defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(dirname(dirname(__DIR__))).'/vendor');
+// defined('YII_APP_PATH') or define('YII_APP_PATH', realpath(dirname(__DIR__.'/adv.dev/', 3)));
+defined('VENDOR_PATH') or define('VENDOR_PATH', dirname(__DIR__, 2).'/vendor/');
+defined('STDIN') or define('STDIN', fopen('php://stdin', 'r'));
+defined('STDOUT') or define('STDOUT', fopen('php://stdout', 'w'));
 // var_dump(VENDOR_PATH);
 
 

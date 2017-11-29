@@ -1,5 +1,5 @@
 # namespace: tests\
-namespace: kubo0\migratearray\tests
+# namespace: kubo0\migratearray\tests
 actor: Tester
 paths:
     tests: tests

@@ -1,8 +1,9 @@
 {
     "name": "kubo0/yii2-migrate",
-    "description": "Yii2 migration as array helper and template",
+    "description": "Yii2 migration assistant",
+    "keywords": ["yii2", "yii2-migrate", "sqlite", "yii migrate"],
     "type": "yii2-extension",
-    "license": "BSD 4-Clause",
+    "license": "MIT",
     "version": "0.2.1",
     "require": {
         "yiisoft/yii2": "^2.0"

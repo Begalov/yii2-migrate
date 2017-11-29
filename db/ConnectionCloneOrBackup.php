@@ -1,11 +1,10 @@
 <?php
-namespace kubo0\migrate;
+namespace kubo0\migrate\db;
 
 use yii\db\Connection;
-/*
- * Author: RUben Begalov@gmail.com
+
+/**
  * Name: ConnectCloneBackup ex. ConnectBackup ex. DbBackup
- * v.0.4
  *
  * Moved from arch-deco.dev/_protected/common/components/db/
  *
@@ -17,6 +16,9 @@ use yii\db\Connection;
  *      $db->setSourceDb('source_db');
  *      $db->backup();
  * You could use backup(true) to reset backup, it set to false by default. 
+ * 
+ * @author RUben Begalov <begalov@gmail.com>
+ * @version [0.0.4]
  */
 class ConnectionCloneOrBackup extends Connection
 {
@@ -102,7 +104,6 @@ class ConnectionCloneOrBackup extends Connection
      * In case of normal use you may set backup db by name and suffix
      * @param string $dbName 
      * @param string $suffix
-     * @return void
      */
     private function setBackupDb($dbName = null, $suffix)
     {
@@ -149,7 +150,6 @@ class ConnectionCloneOrBackup extends Connection
     /**
      * Creates marking file
      * @param bool $state 
-     * @return void
      */
     private static function reset($state = true)
     {
@@ -218,7 +218,7 @@ class ConnectionCloneOrBackup extends Connection
 
     /**
      * Submain execution
-     * @return array $r
+     * @return array
      */
     private function dropCreateInsertTables()
     {
